@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Heritage Connection - Cultural Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --primary: #0D4F6D;
+            --secondary: #F5A623;
+            --accent: #FF6B6B;
+            --bg-light: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #64748B;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), #1a6d8f);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), #e6951a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .streak-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #8B4513;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero {
+            margin-top: 72px;
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(13, 79, 109, 0.95), rgba(26, 109, 143, 0.9));
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 80px 0;
+        }
+
+        .hero-tagline {
+            color: var(--secondary);
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.375rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: #8B4513;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 60px;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4px;
+        }
+
+        .featured-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .course-card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3));
+        }
+
+        .course-icon {
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-info {
+            padding: 24px;
+        }
+
+        .course-category {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .course-title {
+            font-size: 1.375rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .course-description {
+            font-size: 0.9375rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .course-difficulty {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .difficulty-beginner {
+            background: #DCFCE7;
+            color: #16A34A;
+        }
+
+        .difficulty-intermediate {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .difficulty-advanced {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .progress-bar {
+            margin-top: 16px;
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .cultural-highlights {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), #1a6d8f);
+        }
+
+        .cultural-highlights .section-title {
+            color: white;
+        }
+
+        .cultural-highlights .section-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .highlights-scroll {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: none;
+        }
+
+        .highlights-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .highlight-card {
+            flex: 0 0 320px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .highlight-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .highlight-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: #8B4513;
+        }
+
+        .highlight-title {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .highlight-content {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        .highlight-author {
+            margin-top: 16px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-author-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .learn-section {
+            padding: 80px 0;
+        }
+
+        .learn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .learn-image {
+            background: linear-gradient(135deg, var(--secondary), #e6951a);
+            height: 400px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learn-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .learn-image-icon {
+            font-size: 6rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .learn-content h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .learn-content p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .learn-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .learn-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .learn-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #ECFDF5;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10B981;
+            flex-shrink: 0;
+        }
+
+        .learn-feature-text {
+            font-size: 0.9375rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .footer {
+            background: var(--primary);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--secondary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B4513;
+        }
+
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-about {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .footer-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--secondary);
+            color: #8B4513;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .page-container {
+            margin-top: 72px;
+            min-height: calc(100vh - 72px);
+        }
+
+        .courses-page {
+            padding: 48px 0;
+        }
+
+        .courses-filter {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            border: 2px solid var(--border-color);
+            background: var(--bg-white);
+            color: var(--text-dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .course-detail-page {
+            padding: 48px 0;
+        }
+
+        .course-detail-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+            align-items: center;
+        }
+
+        .course-detail-image {
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: white;
+        }
+
+        .course-detail-info h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .course-detail-meta {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .course-detail-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+        }
+
+        .course-detail-description {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .lessons-section h2 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .lesson-card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .lesson-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+
+        .lesson-card.completed {
+            background: #ECFDF5;
+            border-left: 4px solid #10B981;
+        }
+
+        .lesson-card.current {
+            border-left: 4px solid var(--secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .lesson-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .lesson-info {
+            flex: 1;
+        }
+
+        .lesson-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .lesson-type {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .lesson-duration {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .community-page {
+            padding: 48px 0;
+        }
+
+        .community-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            background: var(--bg-white);
+            padding: 8px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .community-tab {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+        }
+
+        .community-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .forum-posts {
+            display: grid;
+            gap: 20px;
+        }
+
+        .forum-post {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .forum-post:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .post-author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .post-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-author-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .post-date {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .post-category {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            background: #ECFDF5;
+            color: #10B981;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .post-title:hover {
+            color: #1a6d8f;
+        }
+
+        .post-content {
+            font-size: 0.9375rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .post-action:hover {
+            color: var(--primary);
+        }
+
+        .exchange-programs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .exchange-card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .exchange-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .exchange-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .exchange-country {
+            font-size: 1.5rem;
+        }
+
+        .exchange-flag {
+            width: 48px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 6px;
+        }
+
+        .exchange-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .exchange-language {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 12px;
+        }
+
+        .exchange-description {
+            font-size: 0.9375rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .exchange-slots {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slots-count {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .slots-count strong {
+            color: var(--primary);
+        }
+
+        .profile-page {
+            padding: 48px 0;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary), #1a6d8f);
+            border-radius: var(--radius);
+            padding: 48px;
+            margin-bottom: 32px;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), #e6951a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem;
+            font-weight: 700;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-name {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .profile-level {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .profile-stat-item {
+            text-align: center;
+        }
+
+        .profile-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .profile-stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4px;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .profile-section {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .badge-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .badge-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .badge-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1.25rem;
+            color: #8B4513;
+        }
+
+        .badge-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .completed-courses-list {
+            list-style: none;
+        }
+
+        .completed-course-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+        }
+
+        .completed-course-icon {
+            width: 36px;
+            height: 36px;
+            background: #ECFDF5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10B981;
+        }
+
+        .completed-course-info {
+            flex: 1;
+        }
+
+        .completed-course-title {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .completed-course-date {
+            font-size: 0.8125rem;
+            color: var(--text-light);
+        }
+
+        .learning-progress {
+            margin-bottom: 24px;
+        }
+
+        .progress-item {
+            margin-bottom: 16px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+
+        .progress-header span:first-child {
+            color: var(--text-dark);
+        }
+
+        .progress-header span:last-child {
+            color: var(--primary);
+        }
+
+        .progress-bar-bg {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .quiz-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .quiz-content {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .quiz-modal.active .quiz-content {
+            transform: translateY(0);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .quiz-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .quiz-close {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quiz-close:hover {
+            background: var(--border-color);
+        }
+
+        .quiz-question {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: rgba(13, 79, 109, 0.05);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--secondary);
+            background: rgba(245, 166, 35, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+        }
+
+        .quiz-option.wrong {
+            border-color: #DC2626;
+            background: rgba(220, 38, 38, 0.1);
+            color: #DC2626;
+        }
+
+        .quiz-feedback {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: #ECFDF5;
+            color: #16A34A;
+        }
+
+        .quiz-feedback.wrong {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        .quiz-next-btn {
+            margin-top: 24px;
+            width: 100%;
+        }
+
+        .story-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .story-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .story-content {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .story-modal.active .story-content {
+            transform: translateY(0);
+        }
+
+        .story-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .story-title {
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+
+        .story-close {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .story-close:hover {
+            background: var(--border-color);
+        }
+
+        .story-text {
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .story-character {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+            margin-bottom: 24px;
+        }
+
+        .story-character-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .story-character-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .story-character-role {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .story-completed-btn {
+            width: 100%;
+        }
+
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .game-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .game-content {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .game-modal.active .game-content {
+            transform: translateY(0);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .game-close {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .game-close:hover {
+            background: var(--border-color);
+        }
+
+        .game-instruction {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .game-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .game-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .game-card.matched {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .game-card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-card-front {
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+        }
+
+        .game-card-back {
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        .game-score {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .game-completed-btn {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-light);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .user-profile {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: var(--shadow-md);
+                padding: 20px;
+            }
+
+            .mobile-nav.active {
+                display: block;
+            }
+
+            .mobile-nav-links {
+                list-style: none;
+            }
+
+            .mobile-nav-links li {
+                margin-bottom: 16px;
+            }
+
+            .mobile-nav-links a {
+                text-decoration: none;
+                color: var(--text-dark);
+                font-weight: 500;
+                font-size: 1.125rem;
+            }
+
+            .hero {
+                height: 500px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .hero-stats {
+                gap: 30px;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .learn-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .course-detail-header {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .exchange-programs {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .badges-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .community-tabs {
+                overflow-x: auto;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo" onclick="navigateTo('home')">
+                <div class="logo-icon">
+                    <i data-lucide="globe"></i>
+                </div>
+                <span class="logo-text">Global Heritage</span>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="navigateTo('home')" class="active">Home</a></li>
+                    <li><a href="#" onclick="navigateTo('courses')">Courses</a></li>
+                    <li><a href="#" onclick="navigateTo('community')">Community</a></li>
+                    <li><a href="#" onclick="navigateTo('profile')">Profile</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-profile">
+                <div class="streak-badge">
+                    <i data-lucide="flame" size="16"></i>
+                    7 Day Streak
+                </div>
+                <div class="user-avatar" onclick="navigateTo('profile')">
+                    J
+                </div>
+            </div>
+
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+
+        <div class="mobile-nav" id="mobile-nav">
+            <ul class="mobile-nav-links">
+                <li><a href="#" onclick="navigateTo('home'); toggleMobileMenu()">Home</a></li>
+                <li><a href="#" onclick="navigateTo('courses'); toggleMobileMenu()">Courses</a></li>
+                <li><a href="#" onclick="navigateTo('community'); toggleMobileMenu()">Community</a></li>
+                <li><a href="#" onclick="navigateTo('profile'); toggleMobileMenu()">Profile</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div id="home-page" class="page active">
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="container hero-content">
+                    <div class="hero-tagline">Discover. Learn. Connect.</div>
+                    <h1 class="hero-title">Explore World Cultures</h1>
+                    <p class="hero-subtitle">Embark on a journey of cultural discovery. Learn traditions, customs, and stories from around the globe through interactive experiences.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="navigateTo('courses')">
+                            <i data-lucide="play-circle"></i>
+                            Start Learning
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i data-lucide="users"></i>
+                            Join Community
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Courses</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100K+</div>
+                            <div class="stat-label">Learners</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Featured Courses</h2>
+                        <p class="section-description">Dive into rich cultural experiences from around the world. Each course is crafted by local experts to provide authentic insights.</p>
+                    </div>
+                    <div class="courses-grid" id="featured-courses">
+                    </div>
+                </div>
+            </section>
+
+            <section class="cultural-highlights">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Cultural Highlights</h2>
+                        <p class="section-description">Discover fascinating stories and traditions shared by our community members.</p>
+                    </div>
+                    <div class="highlights-scroll">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i data-lucide="coffee"></i>
+                            </div>
+                            <h3 class="highlight-title">The Art of Japanese Tea Ceremony</h3>
+                            <p class="highlight-content">Explore the profound philosophy behind chanoyu, where every movement carries meaning and mindfulness is cultivated through ritual.</p>
+                            <div class="highlight-author">
+                                <div class="highlight-author-avatar">S</div>
+                                <span>Shared by Satoko from Kyoto</span>
+                            </div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i data-lucide="music"></i>
+                            </div>
+                            <h3 class="highlight-title">West African Drum Traditions</h3>
+                            <p class="highlight-content">Learn how djembe drums connect communities and tell stories through rhythm, passed down through generations.</p>
+                            <div class="highlight-author">
+                                <div class="highlight-author-avatar">K</div>
+                                <span>Shared by Kofi from Ghana</span>
+                            </div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i data-lucide="book-open"></i>
+                            </div>
+                            <h3 class="highlight-title">Indian Classical Dance Stories</h3>
+                            <p class="highlight-content">Discover how Bharatanatyam movements convey ancient mythology and express complex emotions through intricate gestures.</p>
+                            <div class="highlight-author">
+                                <div class="highlight-author-avatar">R</div>
+                                <span>Shared by Radha from Chennai</span>
+                            </div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i data-lucide="utensils"></i>
+                            </div>
+                            <h3 class="highlight-title">Mexican Family Cooking Traditions</h3>
+                            <p class="highlight-content">Experience the warmth of Mexican home cooking, where recipes are cherished heirlooms connecting generations.</p>
+                            <div class="highlight-author">
+                                <div class="highlight-author-avatar">M</div>
+                                <span>Shared by Maria from Oaxaca</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="learn-section">
+                <div class="container">
+                    <div class="learn-grid">
+                        <div class="learn-image">
+                            <i data-lucide="graduation-cap" class="learn-image-icon"></i>
+                        </div>
+                        <div class="learn-content">
+                            <h3>How It Works</h3>
+                            <p>Our platform connects you with authentic cultural experiences through interactive lessons, storytelling, and community exchange. Learn at your own pace while building meaningful connections.</p>
+                            <div class="learn-features">
+                                <div class="learn-feature">
+                                    <div class="learn-feature-icon">
+                                        <i data-lucide="story"></i>
+                                    </div>
+                                    <span class="learn-feature-text">Interactive storytelling by local experts</span>
+                                </div>
+                                <div class="learn-feature">
+                                    <div class="learn-feature-icon">
+                                        <i data-lucide="gamepad-2"></i>
+                                    </div>
+                                    <span class="learn-feature-text">Fun games to reinforce learning</span>
+                                </div>
+                                <div class="learn-feature">
+                                    <div class="learn-feature-icon">
+                                        <i data-lucide="users"></i>
+                                    </div>
+                                    <span class="learn-feature-text">Connect with global community</span>
+                                </div>
+                                <div class="learn-feature">
+                                    <div class="learn-feature-icon">
+                                        <i data-lucide="award"></i>
+                                    </div>
+                                    <span class="learn-feature-text">Earn badges for achievements</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" style="margin-top: 24px;" onclick="navigateTo('courses')">
+                                <i data-lucide="arrow-right"></i>
+                                Browse All Courses
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="courses-page" class="page page-container">
+            <div class="container courses-page">
+                <h1 class="section-title" style="margin-bottom: 16px;">Course Library</h1>
+                <p class="section-description" style="max-width: 100%; margin-bottom: 32px;">Discover courses from around the world. Filter by region or topic to find your next cultural adventure.</p>
+                
+                <div class="courses-filter">
+                    <button class="filter-btn active" onclick="filterCourses('all')">All Regions</button>
+                    <button class="filter-btn" onclick="filterCourses('asia')">Asia</button>
+                    <button class="filter-btn" onclick="filterCourses('europe')">Europe</button>
+                    <button class="filter-btn" onclick="filterCourses('africa')">Africa</button>
+                    <button class="filter-btn" onclick="filterCourses('americas')">Americas</button>
+                    <button class="filter-btn" onclick="filterCourses('oceania')">Oceania</button>
+                </div>
+
+                <div class="courses-grid" id="all-courses">
+                </div>
+            </div>
+        </div>
+
+        <div id="course-detail-page" class="page page-container">
+            <div class="container course-detail-page">
+                <button class="btn btn-secondary" style="margin-bottom: 24px;" onclick="navigateTo('courses')">
+                    <i data-lucide="arrow-left"></i>
+                    Back to Courses
+                </button>
+                
+                <div id="course-detail-content">
+                </div>
+            </div>
+        </div>
+
+        <div id="community-page" class="page page-container">
+            <div class="container community-page">
+                <h1 class="section-title" style="margin-bottom: 16px;">Community</h1>
+                <p class="section-description" style="max-width: 100%; margin-bottom: 32px;">Join discussions, share experiences, and connect with learners worldwide.</p>
+
+                <div class="community-tabs">
+                    <div class="community-tab active" onclick="switchCommunityTab('forum')">Forum</div>
+                    <div class="community-tab" onclick="switchCommunityTab('exchange')">Exchange Programs</div>
+                </div>
+
+                <div id="community-forum">
+                    <div class="forum-posts" id="forum-posts">
+                    </div>
+                </div>
+
+                <div id="community-exchange" style="display: none;">
+                    <div class="exchange-programs" id="exchange-programs">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile-page" class="page page-container">
+            <div class="container profile-page">
+                <div class="profile-header">
+                    <div class="profile-avatar">J</div>
+                    <h1 class="profile-name">Jenny Chen</h1>
+                    <div class="profile-level">Level 12 - Cultural Explorer</div>
+                    <div class="profile-stats">
+                        <div class="profile-stat-item">
+                            <div class="profile-stat-value">4,850</div>
+                            <div class="profile-stat-label">Total XP</div>
+                        </div>
+                        <div class="profile-stat-item">
+                            <div class="profile-stat-value">7</div>
+                            <div class="profile-stat-label">Days Streak</div>
+                        </div>
+                        <div class="profile-stat-item">
+                            <div class="profile-stat-value">8</div>
+                            <div class="profile-stat-label">Completed Courses</div>
+                        </div>
+                        <div class="profile-stat-item">
+                            <div class="profile-stat-value">15</div>
+                            <div class="profile-stat-label">Badges Earned</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <div class="profile-section">
+                        <h3 class="profile-section-title">
+                            <i data-lucide="award"></i>
+                            My Badges
+                        </h3>
+                        <div class="badges-grid" id="user-badges">
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3 class="profile-section-title">
+                            <i data-lucide="check-circle"></i>
+                            Completed Courses
+                        </h3>
+                        <ul class="completed-courses-list" id="completed-courses">
+                        </ul>
+                    </div>
+
+                    <div class="profile-section" style="grid-column: 1 / -1;">
+                        <h3 class="profile-section-title">
+                            <i data-lucide="trending-up"></i>
+                            Learning Progress
+                        </h3>
+                        <div class="learning-progress" id="learning-progress">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i data-lucide="globe"></i>
+                        </div>
+                        <span class="footer-logo-text">Global Heritage</span>
+                    </div>
+                    <p class="footer-about">Building bridges between cultures through education and exchange. Our mission is to create global citizens who understand and respect diverse traditions.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Explore</h4>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-link"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-link"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="social-link"><i data-lucide="youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Global Heritage Connection. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="quiz-modal" id="quiz-modal">
+        <div class="quiz-content">
+            <div class="quiz-header">
+                <h2 class="quiz-title">Quiz Time!</h2>
+                <div class="quiz-close" onclick="closeQuiz()">
+                    <i data-lucide="x"></i>
+                </div>
+            </div>
+            <div class="quiz-question" id="quiz-question"></div>
+            <div class="quiz-options" id="quiz-options"></div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+            <button class="btn btn-primary quiz-next-btn" id="quiz-next-btn" style="display: none;" onclick="nextQuizQuestion()">
+                Next Question
+            </button>
+        </div>
+    </div>
+
+    <div class="story-modal" id="story-modal">
+        <div class="story-content">
+            <div class="story-header">
+                <h2 class="story-title" id="story-title"></h2>
+                <div class="story-close" onclick="closeStory()">
+                    <i data-lucide="x"></i>
+                </div>
+            </div>
+            <div class="story-character">
+                <div class="story-character-avatar" id="story-character-avatar"></div>
+                <div>
+                    <div class="story-character-name" id="story-character-name"></div>
+                    <div class="story-character-role" id="story-character-role"></div>
+                </div>
+            </div>
+            <div class="story-text" id="story-text"></div>
+            <button class="btn btn-primary story-completed-btn" onclick="completeStory()">
+                Mark as Completed
+            </button>
+        </div>
+    </div>
+
+    <div class="game-modal" id="game-modal">
+        <div class="game-content">
+            <div class="game-header">
+                <h2 class="game-title">Memory Match</h2>
+                <div class="game-close" onclick="closeGame()">
+                    <i data-lucide="x"></i>
+                </div>
+            </div>
+            <div class="game-instruction">Match the cultural symbols with their meanings!</div>
+            <div class="game-grid" id="game-grid"></div>
+            <div class="game-score" id="game-score">Matches: 0/4</div>
+            <button class="btn btn-primary game-completed-btn" id="game-completed-btn" style="display: none;" onclick="completeGame()">
+                Game Completed!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const coursesData = [
+            { id: '1', title: 'Japanese Tea Ceremony', region: 'asia', country: 'Japan', description: 'Explore the profound philosophy and rituals of chanoyu, the Japanese tea ceremony.', difficulty: 'intermediate', duration: 45, icon: 'coffee', progress: 60 },
+            { id: '2', title: 'Indian Classical Dance', region: 'asia', country: 'India', description: 'Discover the storytelling and expressive movements of Bharatanatyam dance.', difficulty: 'advanced', duration: 60, icon: 'music', progress: 30 },
+            { id: '3', title: 'Mediterranean Cuisine', region: 'europe', country: 'Italy', description: 'Learn the art of Italian cooking and the cultural significance of food in Mediterranean life.', difficulty: 'beginner', duration: 30, icon: 'utensils', progress: 100 },
+            { id: '4', title: 'West African Drum Traditions', region: 'africa', country: 'Ghana', description: 'Experience the rhythmic traditions of djembe and their role in community gatherings.', difficulty: 'beginner', duration: 35, icon: 'music', progress: 80 },
+            { id: '5', title: 'Mexican Folk Art', region: 'americas', country: 'Mexico', description: 'Explore the vibrant world of Mexican folk art, from pottery to textiles.', difficulty: 'intermediate', duration: 40, icon: 'palette', progress: 20 },
+            { id: '6', title: 'Australian Aboriginal Culture', region: 'oceania', country: 'Australia', description: 'Learn about the world\'s oldest continuous culture and Dreamtime stories.', difficulty: 'advanced', duration: 50, icon: 'tree-pine', progress: 0 },
+            { id: '7', title: 'Chinese Calligraphy', region: 'asia', country: 'China', description: 'Discover the art and philosophy of Chinese calligraphy.', difficulty: 'intermediate', duration: 45, icon: 'pen-tool', progress: 50 },
+            { id: '8', title: 'Moroccan Spice Traditions', region: 'africa', country: 'Morocco', description: 'Explore the aromatic world of Moroccan spices and culinary heritage.', difficulty: 'beginner', duration: 30, icon: 'flame', progress: 0 },
+            { id: '9', title: 'Brazilian Carnival', region: 'americas', country: 'Brazil', description: 'Experience the vibrant culture of Brazilian Carnival and its traditions.', difficulty: 'beginner', duration: 35, icon: 'party-popper', progress: 0 },
+            { id: '10', title: 'Scottish Folk Music', region: 'europe', country: 'Scotland', description: 'Discover the rich traditions of Scottish folk music and bagpipes.', difficulty: 'intermediate', duration: 40, icon: 'music', progress: 0 },
+            { id: '11', title: 'Thai Temple Culture', region: 'asia', country: 'Thailand', description: 'Explore the spiritual traditions and architecture of Thai temples.', difficulty: 'advanced', duration: 55, icon: 'landmark', progress: 0 },
+            { id: '12', title: 'New Zealand Maori Culture', region: 'oceania', country: 'New Zealand', description: 'Learn about Maori traditions, haka dance, and cultural heritage.', difficulty: 'intermediate', duration: 45, icon: 'users', progress: 0 }
+        ];
+
+        const lessonsData = {
+            '1': [
+                { id: '1-1', title: 'The History of Tea Ceremony', type: 'story', duration: 15, completed: true },
+                { id: '1-2', title: 'Tea Ceremony Equipment', type: 'story', duration: 10, completed: true },
+                { id: '1-3', title: 'Quiz: Tea Ceremony Basics', type: 'quiz', duration: 10, completed: true },
+                { id: '1-4', title: 'The Tea Ceremony Ritual', type: 'story', duration: 10, completed: false },
+                { id: '1-5', title: 'Memory Match: Tea Tools', type: 'game', duration: 10, completed: false }
+            ],
+            '2': [
+                { id: '2-1', title: 'Introduction to Bharatanatyam', type: 'story', duration: 15, completed: true },
+                { id: '2-2', title: 'Basic Dance Movements', type: 'story', duration: 20, completed: false },
+                { id: '2-3', title: 'Quiz: Dance Terminology', type: 'quiz', duration: 10, completed: false },
+                { id: '2-4', title: 'Storytelling Through Dance', type: 'story', duration: 15, completed: false }
+            ],
+            '3': [
+                { id: '3-1', title: 'Mediterranean Diet', type: 'story', duration: 10, completed: true },
+                { id: '3-2', title: 'Basic Italian Ingredients', type: 'story', duration: 10, completed: true },
+                { id: '3-3', title: 'Quiz: Italian Foods', type: 'quiz', duration: 10, completed: true }
+            ],
+            '4': [
+                { id: '4-1', title: 'History of Djembe', type: 'story', duration: 10, completed: true },
+                { id: '4-2', title: 'Basic Rhythms', type: 'story', duration: 15, completed: true },
+                { id: '4-3', title: 'Quiz: African Music', type: 'quiz', duration: 10, completed: true }
+            ],
+            '5': [
+                { id: '5-1', title: 'Introduction to Mexican Folk Art', type: 'story', duration: 15, completed: false },
+                { id: '5-2', title: 'Traditional Pottery', type: 'story', duration: 15, completed: false },
+                { id: '5-3', title: 'Quiz: Folk Art Symbols', type: 'quiz', duration: 10, completed: false }
+            ],
+            '6': [
+                { id: '6-1', title: 'Introduction to Aboriginal Culture', type: 'story', duration: 20, completed: false },
+                { id: '6-2', title: 'Dreamtime Stories', type: 'story', duration: 20, completed: false },
+                { id: '6-3', title: 'Quiz: Aboriginal Culture', type: 'quiz', duration: 10, completed: false }
+            ],
+            '7': [
+                { id: '7-1', title: 'History of Chinese Calligraphy', type: 'story', duration: 15, completed: true },
+                { id: '7-2', title: 'Basic Brush Strokes', type: 'story', duration: 20, completed: true },
+                { id: '7-3', title: 'Quiz: Calligraphy Styles', type: 'quiz', duration: 10, completed: false },
+                { id: '7-4', title: 'Memory Match: Characters', type: 'game', duration: 10, completed: false }
+            ],
+            '8': [
+                { id: '8-1', title: 'Moroccan Spice Market', type: 'story', duration: 15, completed: false },
+                { id: '8-2', title: 'Common Moroccan Spices', type: 'story', duration: 15, completed: false },
+                { id: '8-3', title: 'Quiz: Spice Identification', type: 'quiz', duration: 10, completed: false }
+            ],
+            '9': [
+                { id: '9-1', title: 'History of Carnival', type: 'story', duration: 15, completed: false },
+                { id: '9-2', title: 'Carnival Traditions', type: 'story', duration: 15, completed: false },
+                { id: '9-3', title: 'Quiz: Carnival Facts', type: 'quiz', duration: 10, completed: false }
+            ],
+            '10': [
+                { id: '10-1', title: 'Scottish Folk Music History', type: 'story', duration: 15, completed: false },
+                { id: '10-2', title: 'Bagpipe Basics', type: 'story', duration: 20, completed: false },
+                { id: '10-3', title: 'Quiz: Scottish Instruments', type: 'quiz', duration: 10, completed: false }
+            ],
+            '11': [
+                { id: '11-1', title: 'Thai Buddhism', type: 'story', duration: 20, completed: false },
+                { id: '11-2', title: 'Temple Architecture', type: 'story', duration: 25, completed: false },
+                { id: '11-3', title: 'Quiz: Temple Etiquette', type: 'quiz', duration: 10, completed: false }
+            ],
+            '12': [
+                { id: '12-1', title: 'Maori History and Culture', type: 'story', duration: 20, completed: false },
+                { id: '12-2', title: 'The Haka Dance', type: 'story', duration: 15, completed: false },
+                { id: '12-3', title: 'Quiz: Maori Culture', type: 'quiz', duration: 10, completed: false }
+            ]
+        };
+
+        const forumPosts = [
+            { id: '1', author: 'Sarah Johnson', avatar: 'S', title: 'My Experience with Japanese Tea Ceremony', content: 'I recently completed the Japanese Tea Ceremony course and it was absolutely fascinating! The storytelling approach really helped me understand the depth of this tradition.', category: 'Culture', replies: 12, likes: 45, createdAt: '2 hours ago' },
+            { id: '2', author: 'Marcus Okoro', avatar: 'M', title: 'West African Drumming Workshop', content: 'Has anyone attended a live drumming workshop? I\'m planning to visit Ghana next year and would love recommendations!', category: 'Travel', replies: 8, likes: 23, createdAt: '5 hours ago' },
+            { id: '3', author: 'Priya Patel', avatar: 'P', title: 'Indian Dance Class Recommendations', content: 'Looking for online Bharatanatyam classes. Any suggestions for good instructors?', category: 'Learning', replies: 15, likes: 38, createdAt: '1 day ago' },
+            { id: '4', author: 'Carlos Hernandez', avatar: 'C', title: 'Mexican Folk Art Collection', content: 'I\'ve started collecting Mexican pottery and would love to connect with others who share this interest!', category: 'Art', replies: 6, likes: 32, createdAt: '1 day ago' },
+            { id: '5', author: 'Emma Wilson', avatar: 'E', title: 'Aboriginal Culture Documentaries', content: 'Just watched an amazing documentary about Aboriginal culture in Australia. Highly recommend!', category: 'Media', replies: 9, likes: 28, createdAt: '2 days ago' }
+        ];
+
+        const exchangePrograms = [
+            { id: '1', hostFamily: 'Tanaka Family', country: 'Japan', language: 'Japanese', description: 'Experience traditional Japanese family life in Kyoto. Learn tea ceremony, cooking, and seasonal traditions.', availableSlots: 2 },
+            { id: '2', hostFamily: 'Singh Family', country: 'India', language: 'Hindi', description: 'Immerse yourself in Indian culture in Delhi. Participate in festivals, cooking classes, and visit historical sites.', availableSlots: 3 },
+            { id: '3', hostFamily: 'Garcia Family', country: 'Mexico', language: 'Spanish', description: 'Live with a Mexican family in Oaxaca. Learn about folk art, traditional cooking, and community traditions.', availableSlots: 1 },
+            { id: '4', hostFamily: 'Boateng Family', country: 'Ghana', language: 'English', description: 'Experience Ghanaian family life in Accra. Learn drumming, dance, and local cuisine.', availableSlots: 2 },
+            { id: '5', hostFamily: 'Smith Family', country: 'Australia', language: 'English', description: 'Live with an Aboriginal family in Australia. Learn about Dreamtime stories and traditional crafts.', availableSlots: 1 }
+        ];
+
+        const userBadges = [
+            { id: '1', name: 'Cultural Explorer', icon: 'globe' },
+            { id: '2', name: 'Storyteller', icon: 'book-open' },
+            { id: '3', name: 'Quiz Master', icon: 'trophy' },
+            { id: '4', name: 'Game Champion', icon: 'gamepad-2' },
+            { id: '5', name: '7-Day Streak', icon: 'flame' },
+            { id: '6', name: 'Asia Explorer', icon: 'map-pin' },
+            { id: '7', name: 'Beginner', icon: 'star' },
+            { id: '8', name: 'Intermediate', icon: 'award' },
+            { id: '9', name: 'Tea Expert', icon: 'coffee' },
+            { id: '10', name: 'Music Lover', icon: 'music' },
+            { id: '11', name: 'Foodie', icon: 'utensils' },
+            { id: '12', name: 'Dancer', icon: 'footprints' },
+            { id: '13', name: 'Artist', icon: 'palette' },
+            { id: '14', name: 'Calligrapher', icon: 'pen-tool' },
+            { id: '15', name: 'Global Citizen', icon: 'users' }
+        ];
+
+        const completedCourses = [
+            { id: '3', title: 'Mediterranean Cuisine', date: 'June 2024', icon: 'utensils' },
+            { id: '4', title: 'West African Drum Traditions', date: 'May 2024', icon: 'music' },
+            { id: '7', title: 'Chinese Calligraphy', date: 'April 2024', icon: 'pen-tool' },
+            { id: '1', title: 'Japanese Tea Ceremony', date: 'March 2024', icon: 'coffee' }
+        ];
+
+        const learningProgress = [
+            { course: 'Japanese Tea Ceremony', progress: 60 },
+            { course: 'Indian Classical Dance', progress: 30 },
+            { course: 'Chinese Calligraphy', progress: 50 },
+            { course: 'Mexican Folk Art', progress: 20 }
+        ];
+
+        let currentQuizIndex = 0;
+        let currentCourseId = null;
+        let matchedPairs = 0;
+
+        function navigateTo(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(`${pageName}-page`).classList.add('active');
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.nav-links a[onclick="navigateTo('${pageName}')"]`)?.classList.add('active');
+
+            if (pageName === 'home') {
+                renderFeaturedCourses();
+            } else if (pageName === 'courses') {
+                renderAllCourses();
+            } else if (pageName === 'community') {
+                renderForumPosts();
+                renderExchangePrograms();
+            } else if (pageName === 'profile') {
+                renderUserBadges();
+                renderCompletedCourses();
+                renderLearningProgress();
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-nav').classList.toggle('active');
+        }
+
+        function renderCourseCard(course) {
+            const difficultyClass = `difficulty-${course.difficulty}`;
+            const difficultyText = course.difficulty.charAt(0).toUpperCase() + course.difficulty.slice(1);
+            
+            return `
+                <div class="course-card" onclick="openCourseDetail('${course.id}')">
+                    <div class="course-image">
+                        <i data-lucide="${course.icon}" class="course-icon"></i>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-category">${course.region.toUpperCase()}</div>
+                        <h3 class="course-title">${course.title}</h3>
+                        <p class="course-description">${course.description}</p>
+                        <div class="course-meta">
+                            <div class="course-duration">
+                                <i data-lucide="clock" size="16"></i>
+                                ${course.duration} min
+                            </div>
+                            <span class="course-difficulty ${difficultyClass}">${difficultyText}</span>
+                        </div>
+                        ${course.progress > 0 ? `
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${course.progress}%"></div>
+                            </div>
+                            <div style="text-align: right; font-size: 0.8125rem; color: var(--text-light); margin-top: 4px;">
+                                ${course.progress}% Complete
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFeaturedCourses() {
+            const featuredCourses = coursesData.slice(0, 6);
+            document.getElementById('featured-courses').innerHTML = featuredCourses.map(renderCourseCard).join('');
+            lucide.createIcons();
+        }
+
+        function renderAllCourses(filter = 'all') {
+            const filteredCourses = filter === 'all' 
+                ? coursesData 
+                : coursesData.filter(course => course.region === filter);
+            document.getElementById('all-courses').innerHTML = filteredCourses.map(renderCourseCard).join('');
+            lucide.createIcons();
+        }
+
+        function filterCourses(region) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderAllCourses(region);
+        }
+
+        function openCourseDetail(courseId) {
+            currentCourseId = courseId;
+            const course = coursesData.find(c => c.id === courseId);
+            const lessons = lessonsData[courseId] || [];
+
+            const lessonCards = lessons.map((lesson, index) => {
+                const isCompleted = lesson.completed;
+                const isCurrent = !lesson.completed && !lessons.slice(0, index).some(l => !l.completed);
+                let icon = 'book-open';
+                if (lesson.type === 'quiz') icon = 'help-circle';
+                if (lesson.type === 'game') icon = 'gamepad-2';
+
+                return `
+                    <div class="lesson-card ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}" onclick="openLesson('${lesson.id}', '${lesson.type}')">
+                        <div class="lesson-icon">
+                            <i data-lucide="${icon}"></i>
+                        </div>
+                        <div class="lesson-info">
+                            <div class="lesson-title">${lesson.title}</div>
+                            <div class="lesson-type">${lesson.type.charAt(0).toUpperCase() + lesson.type.slice(1)}</div>
+                        </div>
+                        <div class="lesson-duration">
+                            <i data-lucide="clock" size="14"></i>
+                            ${lesson.duration} min
+                        </div>
+                        ${isCompleted ? '<i data-lucide="check" size="20" style="color: #10B981;"></i>' : ''}
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('course-detail-content').innerHTML = `
+                <div class="course-detail-header">
+                    <div class="course-detail-image">
+                        <i data-lucide="${course.icon}"></i>
+                    </div>
+                    <div class="course-detail-info">
+                        <h1>${course.title}</h1>
+                        <div class="course-detail-meta">
+                            <div class="course-detail-meta-item">
+                                <i data-lucide="map-pin" size="16"></i>
+                                ${course.country}
+                            </div>
+                            <div class="course-detail-meta-item">
+                                <i data-lucide="clock" size="16"></i>
+                                ${course.duration} minutes
+                            </div>
+                            <div class="course-detail-meta-item">
+                                <i data-lucide="bar-chart" size="16"></i>
+                                ${course.difficulty}
+                            </div>
+                        </div>
+                        <p class="course-detail-description">${course.description}</p>
+                        <button class="btn btn-primary" onclick="startCourse('${courseId}')">
+                            <i data-lucide="play"></i>
+                            Continue Learning
+                        </button>
+                    </div>
+                </div>
+                <div class="lessons-section">
+                    <h2>Course Lessons</h2>
+                    ${lessonCards}
+                </div>
+            `;
+
+            navigateTo('course-detail');
+            lucide.createIcons();
+        }
+
+        function startCourse(courseId) {
+            const lessons = lessonsData[courseId] || [];
+            const firstIncompleteLesson = lessons.find(l => !l.completed) || lessons[0];
+            if (firstIncompleteLesson) {
+                openLesson(firstIncompleteLesson.id, firstIncompleteLesson.type);
+            }
+        }
+
+        function openLesson(lessonId, type) {
+            if (type === 'quiz') {
+                openQuiz();
+            } else if (type === 'story') {
+                openStory();
+            } else if (type === 'game') {
+                openGame();
+            }
+        }
+
+        const quizQuestions = [
+            {
+                question: 'What does "chanoyu" mean in Japanese?',
+                options: ['Tea ceremony', 'Green tea', 'Tea house', 'Tea master'],
+                correct: 0,
+                feedback: 'Chanoyu literally means "hot water for tea" and refers to the Japanese tea ceremony.'
+            },
+            {
+                question: 'Which country is famous for the Bharatanatyam dance form?',
+                options: ['Japan', 'India', 'China', 'Thailand'],
+                correct: 1,
+                feedback: 'Bharatanatyam is a classical dance form from Tamil Nadu, India.'
+            },
+            {
+                question: 'What is the traditional drum of West Africa?',
+                options: ['Djembe', 'Tabla', 'Bongo', 'Conga'],
+                correct: 0,
+                feedback: 'The djembe is a goblet drum from West Africa, played with bare hands.'
+            },
+            {
+                question: 'Which Mexican state is known for its colorful folk art?',
+                options: ['Oaxaca', 'Mexico City', 'Cancun', 'Guadalajara'],
+                correct: 0,
+                feedback: 'Oaxaca is famous for its vibrant folk art, including pottery and textiles.'
+            }
+        ];
+
+        function openQuiz() {
+            currentQuizIndex = 0;
+            renderQuizQuestion();
+            document.getElementById('quiz-modal').classList.add('active');
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-modal').classList.remove('active');
+        }
+
+        function renderQuizQuestion() {
+            const question = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-question').textContent = question.question;
+            
+            const optionsHtml = question.options.map((option, index) => `
+                <div class="quiz-option" onclick="selectQuizOption(${index})" id="quiz-option-${index}">
+                    <span style="font-weight: 600;">${String.fromCharCode(65 + index)}.</span>
+                    <span>${option}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('quiz-options').innerHTML = optionsHtml;
+            document.getElementById('quiz-feedback').classList.remove('show', 'correct', 'wrong');
+            document.getElementById('quiz-next-btn').style.display = 'none';
+        }
+
+        function selectQuizOption(index) {
+            const question = quizQuestions[currentQuizIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach((opt, i) => {
+                opt.onclick = null;
+                if (i === question.correct) {
+                    opt.classList.add('correct');
+                } else if (i === index && i !== question.correct) {
+                    opt.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.textContent = question.feedback;
+            feedback.classList.add('show');
+            feedback.classList.add(index === question.correct ? 'correct' : 'wrong');
+
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').style.display = 'block';
+            }
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < quizQuestions.length) {
+                renderQuizQuestion();
+            } else {
+                closeQuiz();
+            }
+        }
+
+        const storyData = {
+            title: 'The History of Tea Ceremony',
+            characterName: 'Satoko Tanaka',
+            characterRole: 'Tea Master from Kyoto',
+            characterAvatar: 'S',
+            text: 'The Japanese tea ceremony, known as chanoyu, has a rich history dating back to the 9th century when tea was first introduced from China. However, it was in the 15th century that the tea ceremony evolved into the refined practice we know today.\n\nA key figure in this development was Murata Juko, who emphasized the spiritual aspects of tea. Later, Sen no Rikyu elevated the tea ceremony to its highest form, introducing the concept of "wabi-sabi" - finding beauty in simplicity and imperfection.\n\nToday, the tea ceremony is more than just drinking tea; it is a meditative practice that fosters mindfulness, respect, and connection between host and guest. Every movement, from the preparation of the tea to the arrangement of flowers, is performed with intention and care.'
+        };
+
+        function openStory() {
+            document.getElementById('story-title').textContent = storyData.title;
+            document.getElementById('story-character-avatar').textContent = storyData.characterAvatar;
+            document.getElementById('story-character-name').textContent = storyData.characterName;
+            document.getElementById('story-character-role').textContent = storyData.characterRole;
+            document.getElementById('story-text').textContent = storyData.text;
+            document.getElementById('story-modal').classList.add('active');
+        }
+
+        function closeStory() {
+            document.getElementById('story-modal').classList.remove('active');
+        }
+
+        function completeStory() {
+            closeStory();
+        }
+
+        const gameCards = [
+            { id: 1, icon: 'tea', name: 'Tea' },
+            { id: 2, icon: 'coffee', name: 'Coffee' },
+            { id: 3, icon: 'music', name: 'Music' },
+            { id: 4, icon: 'utensils', name: 'Food' },
+            { id: 1, icon: 'tea', name: 'Tea' },
+            { id: 2, icon: 'coffee', name: 'Coffee' },
+            { id: 3, icon: 'music', name: 'Music' },
+            { id: 4, icon: 'utensils', name: 'Food' }
+        ];
+
+        let flippedCards = [];
+        let lockBoard = false;
+
+        function openGame() {
+            matchedPairs = 0;
+            flippedCards = [];
+            lockBoard = false;
+            document.getElementById('game-score').textContent = 'Matches: 0/4';
+            document.getElementById('game-completed-btn').style.display = 'none';
+            
+            const shuffledCards = [...gameCards].sort(() => Math.random() - 0.5);
+            const gridHtml = shuffledCards.map((card, index) => `
+                <div class="game-card" onclick="flipCard(${index})" id="game-card-${index}" data-id="${card.id}">
+                    <div class="game-card-face game-card-front">
+                        <i data-lucide="help-circle" size="32"></i>
+                    </div>
+                    <div class="game-card-face game-card-back">
+                        <i data-lucide="${card.icon}" size="32"></i>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('game-grid').innerHTML = gridHtml;
+            document.getElementById('game-modal').classList.add('active');
+            lucide.createIcons();
+        }
+
+        function closeGame() {
+            document.getElementById('game-modal').classList.remove('active');
+        }
+
+        function flipCard(index) {
+            if (lockBoard) return;
+            const card = document.getElementById(`game-card-${index}`);
+            
+            if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            
+            card.classList.add('flipped');
+            flippedCards.push({ index, id: card.dataset.id });
+            
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            lockBoard = true;
+            const [card1, card2] = flippedCards;
+            
+            if (card1.id === card2.id) {
+                document.getElementById(`game-card-${card1.index}`).classList.add('matched');
+                document.getElementById(`game-card-${card2.index}`).classList.add('matched');
+                matchedPairs++;
+                document.getElementById('game-score').textContent = `Matches: ${matchedPairs}/4`;
+                
+                if (matchedPairs === 4) {
+                    document.getElementById('game-completed-btn').style.display = 'block';
+                }
+                
+                flippedCards = [];
+                lockBoard = false;
+            } else {
+                setTimeout(() => {
+                    document.getElementById(`game-card-${card1.index}`).classList.remove('flipped');
+                    document.getElementById(`game-card-${card2.index}`).classList.remove('flipped');
+                    flippedCards = [];
+                    lockBoard = false;
+                }, 1000);
+            }
+        }
+
+        function completeGame() {
+            closeGame();
+        }
+
+        function switchCommunityTab(tab) {
+            document.querySelectorAll('.community-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'forum') {
+                document.getElementById('community-forum').style.display = 'block';
+                document.getElementById('community-exchange').style.display = 'none';
+            } else {
+                document.getElementById('community-forum').style.display = 'none';
+                document.getElementById('community-exchange').style.display = 'block';
+            }
+        }
+
+        function renderForumPosts() {
+            const postsHtml = forumPosts.map(post => `
+                <div class="forum-post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="post-author-avatar">${post.avatar}</div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">${post.author}</div>
+                                <div class="post-date">${post.createdAt}</div>
+                            </div>
+                        </div>
+                        <span class="post-category">${post.category}</span>
+                    </div>
+                    <h3 class="post-title">${post.title}</h3>
+                    <p class="post-content">${post.content}</p>
+                    <div class="post-footer">
+                        <div class="post-action">
+                            <i data-lucide="message-circle" size="16"></i>
+                            ${post.replies} replies
+                        </div>
+                        <div class="post-action">
+                            <i data-lucide="heart" size="16"></i>
+                            ${post.likes} likes
+                        </div>
+                        <div class="post-action">
+                            <i data-lucide="share-2" size="16"></i>
+                            Share
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('forum-posts').innerHTML = postsHtml;
+            lucide.createIcons();
+        }
+
+        function renderExchangePrograms() {
+            const exchangeHtml = exchangePrograms.map(exchange => `
+                <div class="exchange-card">
+                    <div class="exchange-header">
+                        <div class="exchange-country">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="exchange-flag"></div>
+                    </div>
+                    <h3 class="exchange-title">${exchange.hostFamily}</h3>
+                    <div class="exchange-language">
+                        <i data-lucide="globe" size="14"></i>
+                        ${exchange.language}
+                    </div>
+                    <p class="exchange-description">${exchange.description}</p>
+                    <div class="exchange-slots">
+                        <div class="slots-count">Available: <strong>${exchange.availableSlots}</strong> slots</div>
+                        <button class="btn btn-primary" style="padding: 8px 20px; font-size: 0.875rem;">
+                            <i data-lucide="calendar"></i>
+                            Apply
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('exchange-programs').innerHTML = exchangeHtml;
+            lucide.createIcons();
+        }
+
+        function renderUserBadges() {
+            const badgesHtml = userBadges.map(badge => `
+                <div class="badge-item">
+                    <div class="badge-icon">
+                        <i data-lucide="${badge.icon}"></i>
+                    </div>
+                    <div class="badge-name">${badge.name}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('user-badges').innerHTML = badgesHtml;
+            lucide.createIcons();
+        }
+
+        function renderCompletedCourses() {
+            const coursesHtml = completedCourses.map(course => `
+                <li class="completed-course-item">
+                    <div class="completed-course-icon">
+                        <i data-lucide="${course.icon}" size="16"></i>
+                    </div>
+                    <div class="completed-course-info">
+                        <div class="completed-course-title">${course.title}</div>
+                        <div class="completed-course-date">Completed ${course.date}</div>
+                    </div>
+                    <i data-lucide="check-circle" size="18" style="color: #10B981;"></i>
+                </li>
+            `).join('');
+            
+            document.getElementById('completed-courses').innerHTML = coursesHtml;
+            lucide.createIcons();
+        }
+
+        function renderLearningProgress() {
+            const progressHtml = learningProgress.map(item => `
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <span>${item.course}</span>
+                        <span>${item.progress}%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: ${item.progress}%"></div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('learning-progress').innerHTML = progressHtml;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderFeaturedCourses();
+        });
+    </script>
